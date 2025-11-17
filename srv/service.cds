@@ -2,12 +2,10 @@ using { ust.sneha.kancharla.db as db } from '../db/schema';
 
 service Myservice {
 
-  // ===== Master data projections =====
   entity BusinessPartner as projection on db.master.businesspartner;
   entity Address         as projection on db.master.address;
   entity Product         as projection on db.master.product;
 
-  // ===== Purchase Order (Header) =====
   @odata.draft.enabled
   @UI.HeaderInfo: {
     TypeName       : 'Purchase Order',
@@ -87,7 +85,7 @@ service Myservice {
     Items
   };
 
-  // ===== Purchase Order Items =====
+
   @UI.HeaderInfo: {
     TypeName       : 'Purchase Order Item',
     TypeNamePlural : 'Purchase Order Items',
@@ -105,7 +103,7 @@ service Myservice {
   @UI.LineItem: [
     { Value: PO_ITEM_POS,  Label: 'PURCHASE ORDER ITEM' },
     { Value: PRODUCT_GUID.NODE_KEY, Label: 'PRODUCT GUID' },
-    { Value: code,     Label: 'CURRENCY' },
+    { Value: CURRENCY_code,     Label: 'CURRENCY' },
     { Value: GROSS_AMOUNT, Label: 'GROSS AMOUNT' },
     { Value: NET_AMOUNT,   Label: 'NET AMOUNT' },
     { Value: TAX_AMOUNT,   Label: 'TAX AMOUNT' }
@@ -114,7 +112,7 @@ service Myservice {
   @UI.Identification: [
     { Value: PO_ITEM_POS,  Label: 'PURCHASE ORDER ITEM' },
     { Value: PRODUCT_GUID.NODE_KEY, Label: 'PRODUCT GUID' },
-    { Value:CURRENCY.code,     Label: 'CURRENCY' },
+    { Value:CURRENCY_code,     Label: 'CURRENCY' },
     { Value: GROSS_AMOUNT, Label: 'GROSS AMOUNT' },
     { Value: NET_AMOUNT,   Label: 'NET AMOUNT' },
     { Value: TAX_AMOUNT,   Label: 'TAX AMOUNT' }
@@ -133,7 +131,7 @@ service Myservice {
     PARENT_KEY,
     PO_ITEM_POS,
     PRODUCT_GUID,
-    CURRENCY.code,
+    CURRENCY,
     GROSS_AMOUNT,
     NET_AMOUNT,
     TAX_AMOUNT
